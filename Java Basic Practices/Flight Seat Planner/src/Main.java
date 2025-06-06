@@ -1,17 +1,56 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner sc = new Scanner(System.in);
+        String[][] seat = new String[5][4];
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        // Generate seats randomly
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
+                seat[i][j] = Math.random() < 0.5 ? "O" : "X";
+            }
+        }
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        // Show initial grid
+        System.out.println("Current Grid:");
+        printGrid(seat);
+
+        int x, y;
+
+        while (true) {
+            System.out.print("Book a seat by seat index (row[1-5] column[1-4]): ");
+            x = sc.nextInt();
+            y = sc.nextInt();
+
+            if (x < 1 || x > 5 || y < 1 || y > 4) {
+                System.out.println("Please input a valid index.");
+            } else if (seat[x - 1][y - 1].equals("X")) {
+                System.out.println("Seat already taken.");
+            } else {
+                seat[x - 1][y - 1] = "X";
+                System.out.println("✅ Seat booked successfully.");
+                break;
+            }
+        }
+
+        System.out.println("Updated Grid:");
+        printGrid(seat);
+    }
+
+    // Grid print method
+    public static void printGrid(String[][] seat) {
+        System.out.print("   ");
+        for (int col = 1; col <= seat[0].length; col++) {
+            System.out.print(col + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < seat.length; i++) {
+            System.out.print((i + 1) + " | ");
+            for (int j = 0; j < seat[i].length; j++) {
+                System.out.print(seat[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 }
