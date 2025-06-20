@@ -30,7 +30,8 @@ public class Main {
             }
 
         }
-        return new int[]{firstIndex, lastIndex}; // Placeholder, replace with your implementation
+        return new int[]{firstIndex, lastIndex}; 
+    
     }
 
     public static void main(String[] args) {
