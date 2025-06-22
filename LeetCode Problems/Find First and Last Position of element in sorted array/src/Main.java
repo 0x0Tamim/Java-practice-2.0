@@ -5,33 +5,44 @@ public class Main {
 
     // 🔧 Your task: Implement this method
     public static int[] searchRange(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length-1;
-        boolean firstIndexFound = false;
-        boolean secondIndexFound = false;
-        int firstIndex=-1;
-        int lastIndex=-1;
-        while (start<=end){
-            if(nums[start]<target){
-                start += 1;
-            }
-            if(nums[end]>target){
-                end -= 1;
-            }
+      int result[]={-1,-1};
+      int left=0;
+      int right= nums.length-1;
 
-            if(!firstIndexFound && nums[start]==target){
-                firstIndex=start;
-                firstIndexFound = true;
-            }
+      while (left<=right){
+          int mid = left+(right-left)/2;
+          if(nums[mid]==target){
+              result[0] = mid;
+              right=mid-1;
+          }
+          else if(nums[mid]<target){
+              left=mid+1;
+          }
+          else {
+              right=mid-1;
+          }
+      }
 
-            if(!secondIndexFound && nums[end]==target){
-                lastIndex=end;
-                secondIndexFound = true;
-            }
+      left=0;
+      right= nums.length-1;
+      while (left<=right){
+          int mid = left+(right-left)/2;
 
         }
-        return new int[]{firstIndex, lastIndex}; 
-    
+        
+          if(nums[mid]==target){
+              result[1]= mid;
+              left = mid+1;
+          }
+          else if(nums[mid]<target){
+              left = mid+1;
+          }
+          else {
+              right = mid-1;
+          }
+      }
+
+      return result;
     }
 
     public static void main(String[] args) {
